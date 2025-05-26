@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>For Samiksha 😄</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Poppins:wght@300;600&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #a18cd1, #fbc2eb);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Comic Neue', cursive;
+            overflow: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 30px 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 500px;
+            position: relative;
+            z-index: 10;
+        }
+
+        h1 {
+            color: #EF476F;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            animation: bounce 0.5s infinite alternate;
+            transition: all 0.5s;
+        }
+
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+
+        p {
+            color: #555;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            background: #EF476F;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(239, 71, 111, 0.4);
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            background: #FF6B8B;
+        }
+
+        /* Floating Emojis */
+        .emoji {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 6s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-50px) rotate(20deg); }
+        }
+
+        /* Confetti */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #EF476F;
+            opacity: 0;
+            z-index: 11;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #smileImg {
+            width: 150px;
+            margin: 20px auto;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="title">Hey Samiksha! 🙃</h1>
+        <div id="message">
+            <p>Okay, I messed up. But look, I even made you this dumb website! 😂</p>
+            <p>Can we just pretend I'm not an idiot for 5 minutes? Deal? 🤝</p>
+        </div>
+        <img id="smileImg" src="https://i.giphy.com/media/3o7abKhOpu0NwenH3O/giphy.webp" class="hidden">
+        <button class="btn" id="smileBtn">Click If You Smiled (Even a Little)</button>
+    </div>
+
+    <!-- Audio (hidden) -->
+    <audio id="laughSound" src="song1.mp3"></audio>
+
+    <script>
+        // Floating Emojis
+        const emojis = ['😂', '❤️', '🤷‍♀️','❤️', '🎉'];
+        for (let i = 0; i < 15; i++) {
+            const emoji = document.createElement('div');
+            emoji.className = 'emoji';
+            emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            emoji.style.left = Math.random() * 100 + 'vw';
+            emoji.style.top = Math.random() * 100 + 'vh';
+            emoji.style.animationDuration = 4 + Math.random() * 5 + 's';
+            emoji.style.animationDelay = Math.random() * 3 + 's';
+            document.body.appendChild(emoji);
+        }
+
+        // Button Click Effect
+        const btn = document.getElementById('smileBtn');
+        const audio = document.getElementById('laughSound');
+        const smileImg = document.getElementById('smileImg');
+        const title = document.getElementById('title');
+        
+        btn.addEventListener('click', () => {
+            // Play laugh sound
+            audio.play();
+            
+            // Hide the title
+            title.style.display = 'none';
+            
+            // Show GIF
+            smileImg.classList.remove('hidden');
+            
+            // Change button text
+            btn.textContent = "YAY! Mission Accomplished 🎉";
+            btn.style.background = "#06D6A0";
+            
+            // Confetti explosion
+            createConfetti();
+            
+            // Change message
+            document.getElementById('message').innerHTML = 
+                "<p>Knew I could make you smile! Now let's do some cool message for me 😁</p>";
+        });
+
+        // Confetti Function
+        function createConfetti() {
+            const colors = ['#EF476F', '#FFD166', '#06D6A0', '#118AB2', '#073B4C'];
+            
+            for (let i = 0; i < 150; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = -10 + 'px';
+                confetti.style.opacity = 1;
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = Math.random() * 10 + 5 + 'px';
+                
+                document.body.appendChild(confetti);
+                
+                const animationDuration = Math.random() * 3 + 2;
+                
+                confetti.animate([
+                    { top: '-10px', opacity: 1, transform: 'rotate(0deg)' },
+                    { top: '100vh', opacity: 0, transform: 'rotate(360deg)' }
+                ], {
+                    duration: animationDuration * 1000,
+                    easing: 'cubic-bezier(0.1, 0.8, 0.9, 1)',
+                    fill: 'forwards'
+                });
+                
+                setTimeout(() => confetti.remove(), animationDuration * 1000);
+            }
+        }
+    </script>
+</body>
+</html>
